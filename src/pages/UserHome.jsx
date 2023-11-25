@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
+import { useNavigate } from "react-router-dom";
 let dotEnv = import.meta.env;
 
 function ExpandSideBar({
@@ -308,7 +309,7 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
 }
 
 function SideBar() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("currentUser")))
+    const [user, setUser] = useState("")
   const [navItems, setNavItems] = useState("Dashboard");
   const [customersNav, setCustomersNav] = useState("");
   const [transactNav, setTransactNav] = useState("all")
@@ -339,6 +340,7 @@ function SideBar() {
     invoice: false
   })
   const [newCustomer, setNewCustomer] = useState("")
+  const navigate = useNavigate()
 
   let baseUrl, url;
   if (dotEnv.MODE === "development") {
@@ -346,6 +348,16 @@ function SideBar() {
   } else {
     baseUrl = "https://itrack-server.vercel.app"
   }
+
+  useEffect(()=>{
+    let currentUser = localStorage.getItem("currentUser")
+    try{
+      currentUser = JSON.parse(currentUser)
+      setUser(currentUser)
+    } catch(error) {
+      navigate("/log-in")
+    }
+  })
 
   async function getResponse(param) {
     setLoadingState(true);
@@ -377,7 +389,7 @@ function SideBar() {
         setNavRes({ ...navRes, transaction: "" });
         }
     } else if (param === "Invoices") {
-      alert("I")
+      // alert("I")
       try {
         url = baseUrl + "/itrack/transactions"
         response = await fetch(url);
@@ -657,10 +669,15 @@ function SideBar() {
                               <div>
                                 <input type="checkbox" />
                               </div>
-                              <div className="bg-red-20 w-[16%] flex items-center justify-center">
-                                <div className="w-5 h-5 rounded-full bg-red-400"></div>
-                                <p className="border- border-slate-400 px-5 ">
-                                  {items.firstName + items.lastName}
+                              <div className="bg-red-20 w-[16%] flex items-center justify-center ml-5">
+                                <div className="w-[20%] flex items-center justify-center">
+                                  <div className="w-5 h-5 rounded-full bg-red-400 flex items-center justify-center overflow-hidden">
+                                    <img src={items.imageUrl} />
+                                  </div>
+                                </div>
+                               
+                                <p className="w-[80%] border-slate-400 pl-1 truncate text-ellipsis ">
+                                  {items.firstName + " " + items.lastName}
                                 </p>
                               </div>
                               <div className="bg-red-20 w-[16%] ">

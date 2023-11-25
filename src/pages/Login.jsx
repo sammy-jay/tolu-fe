@@ -13,49 +13,21 @@ function Login({ userDetails, setUserDetails }) {
     email: "",
     password: "",
   });
-  let baseUrl;
+
+
+   let baseUrl;
   if (dotEnv.MODE === "development") {
-    baseUrl = "http://localhost:3000";
+    baseUrl = dotEnv.VITE_DEV_URL;
   } else {
-    baseUrl = "https://itrack-server.vercel.app";
+    baseUrl = dotEnv.VITE_PROD_URL;
   }
 
   
-  useEffect(() => {
-    let path = window.location.href;
-    if (path.includes("skip")) {
-      async function createUser() {
-        try {
-          let url = baseUrl + "/itrack/create-user";
-          // alert(url);
-          let response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userDetails),
-          });
-          let data = await response.json();
-          if (response.status === 200) {
-            localStorage.setItem("currentUser", data.message);
-          } else{
-            alert(JSON.stringify(data))
-          }
-          // alert("CY");
-        } catch (error) {
-          console.log("error");
-          // alert("Error Creating User");
-          navigate("/log-in");
-        }
-        let newPath = path.replace("skip", "")
-        window.location.href = newPath
-      }
-      createUser();
-     
-    }
-  }, []);
+  
 
 
   async function handleSubmit(param) {
-    alert(param);
+    // alert(param);
     if (param === "next") {
       navigate("/new-user");
     }
@@ -67,13 +39,16 @@ function Login({ userDetails, setUserDetails }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(signInDetails),
         });
+        // alert("k")
         let data = await response.json();
         if (response.status === 200) {
+          // alert(data.message)
           localStorage.setItem("currentUser", JSON.stringify(data.message));
           navigate("/user/home");
         }
       } catch (error) {
-        alert("EEE");
+        // alert("EEE");
+        console.log(error)
       }
     }
   }
@@ -95,6 +70,7 @@ function Login({ userDetails, setUserDetails }) {
                   Lets's get started!
                 </h1>
                 <form
+                  name="signUpForm"
                   onSubmit={(e) => {
                     e.preventDefault();
                     handleSubmit("next");

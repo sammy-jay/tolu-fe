@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+let dotEnv = import.meta.env
 
 function NewUser({ userDetails, setUserDetails }) {
   const [introPage, setIntroPage] = useState(true);
@@ -9,12 +10,49 @@ function NewUser({ userDetails, setUserDetails }) {
   function handleSubmit(e) {
     e.preventDefault();
   }
+
+  let baseUrl;
+  if (dotEnv.MODE === "development") {
+    baseUrl = dotEnv.VITE_DEV_URL;
+  } else {
+    baseUrl = dotEnv.VITE_PROD_URL;
+  }
+
+  async function handleNext(param) {
+    alert(param)
+   
+          try {
+            let url = baseUrl + "/itrack/create-user";
+            // alert(url);
+            let response = await fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(userDetails),
+            });
+            let data = await response.json();
+            if (response.status === 200) {
+              alert(data.message)
+              localStorage.setItem("currentUser", JSON.stringify(data.message));
+            } else{
+              alert(JSON.stringify(data))
+            }
+            alert("CY");
+            navigate("/log-in");
+          } catch (error) {
+            console.log("errorKKL");
+            alert("Error Creating User");
+            navigate("/log-in");
+          }
+         
+       
+      }
+    
   return (
     <div>
       {introPage ? (
         <div className="fixed top-0 left-0 flex h-full w-full bg-slate-100 items-center justify-center">
           <div className="w-1/3 h-60 mx-auto bg-blue-30">
-            <div className="w-[85%] mx-auto p-5 bg-slate-50 rounded-lg shadow shadow-slate-300 space-y-3">
+            <div className="w-[90%] mx-auto p-5 bg-slate-50 rounded-lg shadow shadow-slate-300 space-y-3">
               <div className="flex justify-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-purple-800"></div>
                 <p className="font-semibold text-xl">iTrack</p>
@@ -31,7 +69,7 @@ function NewUser({ userDetails, setUserDetails }) {
               <div className="flex justify-between">
                 <div className="w-[48%]">
                   <button
-                    onClick={() => navigate("/log-in?skip")}
+                    onClick={() => handleNext("skip")}
                     className="p-1 w-full text-center bg- rounded-md border border-slate-500"
                   >
                     Skip
