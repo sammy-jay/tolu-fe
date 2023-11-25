@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NewUser({userDetails, setUserDetails}) {
+function NewUser({ userDetails, setUserDetails }) {
   const [introPage, setIntroPage] = useState(true);
 
   const navigate = useNavigate();
 
-  function handleSubmit() {
-    alert("kll");
+  function handleSubmit(e) {
+    e.preventDefault();
   }
   return (
     <div>
@@ -31,7 +31,7 @@ function NewUser({userDetails, setUserDetails}) {
               <div className="flex justify-between">
                 <div className="w-[48%]">
                   <button
-                    onClick={() => navigate("/log-in?response=skip")}
+                    onClick={() => navigate("/log-in?skip")}
                     className="p-1 w-full text-center bg- rounded-md border border-slate-500"
                   >
                     Skip
@@ -87,7 +87,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="businessName"
                           type="text"
                           value={userDetails.businessName}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Enter Business Name"
                         />
@@ -107,7 +112,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="country"
                           type="text"
                           value={userDetails.country}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Choose country"
                         />
@@ -125,7 +135,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="state"
                           type="text"
                           value={userDetails.state}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Select state or origin"
                         />
@@ -145,7 +160,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="address"
                           type="text"
                           value={userDetails.address}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Enter your business location"
                         />
@@ -165,7 +185,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="currency"
                           type="text"
                           value={userDetails.currency}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Choose Currency"
                         />
@@ -185,7 +210,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="businessPhone"
                           type="text"
                           value={userDetails.businessPhone}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Enter Business phone"
                         />
@@ -203,7 +233,12 @@ function NewUser({userDetails, setUserDetails}) {
                           name="businessEmail"
                           type="email"
                           value={userDetails.businessEmail}
-                          onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                          onChange={(e) =>
+                            setUserDetails({
+                              ...userDetails,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                           placeholder="Enter Business mail"
                         />

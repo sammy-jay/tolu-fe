@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-// require("dotenv").config()
-let dotEnv = import.meta.env
+let dotEnv = import.meta.env;
 
-function Login({userDetails, setUserDetails}) {
+function Login({ userDetails, setUserDetails }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -12,66 +11,71 @@ function Login({userDetails, setUserDetails}) {
 
   const [signInDetails, setSignInDetails] = useState({
     email: "",
-    password: ""
-  })
-
+    password: "",
+  });
   let baseUrl;
-    if (dotEnv.MODE === "development") {
-        baseUrl = "http://localhost:3000"
-    }else {
-      baseUrl = "https://itrack-server.vercel.app"
-    }
+  if (dotEnv.MODE === "development") {
+    baseUrl = "http://localhost:3000";
+  } else {
+    baseUrl = "https://itrack-server.vercel.app";
+  }
 
   
-    async function createUser(){
+  useEffect(() => {
+    let path = window.location.href;
+    if (path.includes("skip")) {
+      async function createUser() {
         try {
-            let url = baseUrl + "/itrack/create-user"
-            let response = await fetch(url, {
-                method: "POST",
-                headers: {'Content-Type': "application/json"},
-                body: JSON.stringify(userDetails)
-            })
-            let data = await response.json()
-            if (response.status === 200) {
-                localStorage.setItem("currentUser", data.message)
-            }
-            alert("CY")
-        } catch(error) {
-            console.log("error")
-            alert("CN")
+          let url = baseUrl + "/itrack/create-user";
+          // alert(url);
+          let response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userDetails),
+          });
+          let data = await response.json();
+          if (response.status === 200) {
+            localStorage.setItem("currentUser", data.message);
+          } else{
+            alert(JSON.stringify(data))
+          }
+          // alert("CY");
+        } catch (error) {
+          console.log("error");
+          // alert("Error Creating User");
+          navigate("/log-in");
         }
-       
+        let newPath = path.replace("skip", "")
+        window.location.href = newPath
+      }
+      createUser();
+     
     }
-    
-    
+  }, []);
 
-  useEffect(()=>{
-    let URL = window.location.search
-    if (URL.includes("response=skip")) {
-        createUser()
-        window.location.search = ""
+
+  async function handleSubmit(param) {
+    alert(param);
+    if (param === "next") {
+      navigate("/new-user");
     }
-    
-  }, [])
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
+    if (param === "signIn") {
+      try {
         let url = baseUrl + "/itrack/sign-in";
         let response = await fetch(url, {
-            method: "POST",
-            headers: {'Content-Type': "application/json"},
-            body: JSON.stringify(signInDetails)
-        })
-        let data = await response.json()
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signInDetails),
+        });
+        let data = await response.json();
         if (response.status === 200) {
-            localStorage.setItem("currentUser", JSON.stringify(data.message))
-            navigate("/user/home")
+          localStorage.setItem("currentUser", JSON.stringify(data.message));
+          navigate("/user/home");
         }
-    }catch(error) {
-        alert("EEE")
+      } catch (error) {
+        alert("EEE");
+      }
     }
-    
   }
   return (
     <div className="fixed top-0 right-0 left-0 bg-slate-50 w-full h-full">
@@ -90,7 +94,13 @@ function Login({userDetails, setUserDetails}) {
                 <h1 className="font-bold text-black text-2xl">
                   Lets's get started!
                 </h1>
-                <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit("next");
+                  }}
+                  className="mt-10 space-y-5"
+                >
                   <div className="flex justify-between">
                     <div className="relative w-[48%]">
                       <label
@@ -105,7 +115,12 @@ function Login({userDetails, setUserDetails}) {
                         name="firstName"
                         type="text"
                         value={userDetails.firstName}
-                        onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                         className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="First Name"
                       />
@@ -123,7 +138,12 @@ function Login({userDetails, setUserDetails}) {
                         name="lastName"
                         type="text"
                         value={userDetails.lastName}
-                        onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                         className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="Last Name"
                       />
@@ -143,7 +163,12 @@ function Login({userDetails, setUserDetails}) {
                         name="email"
                         type="email"
                         value={userDetails.email}
-                        onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                         className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="Your Email"
                       />
@@ -174,7 +199,12 @@ function Login({userDetails, setUserDetails}) {
                         name="password"
                         type={showPassword ? "text" : "password"}
                         value={userDetails.password}
-                        onChange={(e)=> setUserDetails({...userDetails,[e.target.name]: e.target.value})}
+                        onChange={(e) =>
+                          setUserDetails({
+                            ...userDetails,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                         className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="Password (Minimum of 8 characters)"
                       />
@@ -200,10 +230,7 @@ function Login({userDetails, setUserDetails}) {
                     </div>
                     <div>
                       {checked ? (
-                        <button
-                          onClick={() => navigate("/new-user")}
-                          className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg"
-                        >
+                        <button className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
                           Get Started!
                         </button>
                       ) : (
@@ -222,7 +249,13 @@ function Login({userDetails, setUserDetails}) {
               <div className="">
                 <h1 className="font-bold text-black text-2xl">Welcome back!</h1>
                 <p className="font-light text-lg">Sign in to your account</p>
-                <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit("signIn");
+                  }}
+                  className="mt-10 space-y-5"
+                >
                   <div className="flex justify-between">
                     <div className="relative w-full">
                       <label
@@ -237,7 +270,12 @@ function Login({userDetails, setUserDetails}) {
                         name="email"
                         type="email"
                         value={signInDetails.email}
-                        onChange={(e)=> setSignInDetails({...signInDetails, [e.target.name]: e.target.value})}
+                        onChange={(e) =>
+                          setSignInDetails({
+                            ...signInDetails,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                         className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="Your Email"
                       />
@@ -268,7 +306,12 @@ function Login({userDetails, setUserDetails}) {
                         name="password"
                         type={showPassword ? "text" : "password"}
                         value={signInDetails.password}
-                        onChange={(e)=> setSignInDetails({...signInDetails, [e.target.name]: e.target.value})}
+                        onChange={(e) =>
+                          setSignInDetails({
+                            ...signInDetails,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                         className="w-full p-3 bg-transparent border-[1px] border-slate-300 rounded-md text-lg"
                         placeholder="Password (Minimum of 8 characters)"
                       />
@@ -298,7 +341,7 @@ function Login({userDetails, setUserDetails}) {
           <div className="fixed right-0 h-full w-1/3 bg-purple-200 p-10">
             <p className="font-bold text-right text-purple-700 underline">
               <button onClick={() => setNewUser(false)} className="underline">
-                Sign In{" "}
+                Sign In
               </button>
             </p>
             <div className="relative mt-20 w-[80%] mx-auto bg-red-200 h-1/2 rounded-r-xl">
@@ -329,7 +372,7 @@ function Login({userDetails, setUserDetails}) {
           <div className="fixed right-0 h-full w-1/3 bg-purple-200 p-10">
             <p className="font-bold text-right text-purple-700 underline">
               <button onClick={() => setNewUser(true)} className="underline">
-                Sign Up{" "}
+                Sign Up
               </button>
             </p>
             <div className="relative mt-20 w-[80%] mx-auto bg-red-200 h-1/2 rounded-r-xl">
