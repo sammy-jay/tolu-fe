@@ -723,12 +723,7 @@ function SideBar({due, setDue}) {
                 <NotificationsNoneIcon sx={{fontSize: 30}}/>
               </div>
             </div>
-            <div className="relative w-14 h-14 rounded-full bg-slate-400 flex items-center justify-center">
-              <div className="top-0 bottom-0 bg-slate-800 z-10 absolute w-5 h-5 rounded-full p-1">
-                <div className="w-full h-full bg-green-600 rounded-full"></div>
-              </div>
-              <p className="text-4xl font-medium text-slate-300">{user.firstName[0] + user.lastName[0] }</p>
-            </div>
+            <div className="w-14 h-14 rounded-full bg-slate-200"></div>
             <div>
               <h2 className="font-semibold text-xl text-gray-950">
                 {user.firstName + " " + user.lastName}!
