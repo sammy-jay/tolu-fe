@@ -7,8 +7,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
-import io from 'socket.io-client'
-import MakePayment from './pages/MakePayment';
+import GeneratePLink from './pages/GeneratePLink';
 let dotEnv = import.meta.env;
 
 
@@ -40,7 +39,7 @@ function App() {
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/user/home" element={<UserHome />} />
-      <Route path="/ip" element={<MakePayment />} />
+      <Route path="/generate-link" element={<GeneratePLink />} />
     </Routes>
   )
 }
