@@ -285,7 +285,7 @@ function NewUser({ userDetails, setUserDetails }) {
                     <div>
                       <div>
                         <button
-                          onClick={() => navigate("/user/home")}
+                           onClick={() => handleNext("skip")}
                           className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg"
                         >
                           Continue

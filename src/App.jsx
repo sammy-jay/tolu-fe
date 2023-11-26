@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Customers from "./pages/Customers";
@@ -7,6 +7,10 @@ import MakePayment from "./pages/MakePayment";
 import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
+import io from 'socket.io-client'
+let dotEnv = import.meta.env;
+
+
 
 function App() {
   const [userDetails, setUserDetails] = useState({
@@ -22,6 +26,10 @@ function App() {
     businessPhone: "",
     businessEmail: ""
   })
+
+  
+
+
 
   return (
     <Routes>

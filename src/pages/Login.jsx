@@ -58,7 +58,7 @@ function Login({ userDetails, setUserDetails }) {
         <div className="w-2/3 p-10 bg-yellow-40">
           <div className="flex gap-5 items-center">
             <div>=</div>
-            <p className="font-semibold text-slate-700 text-xl">
+            <p className="font-semibold text-slate-700 text-xl hover:text-red-600">
               <button onClick={() => navigate("/")}>Go back</button>{" "}
             </p>
           </div>
@@ -206,7 +206,7 @@ function Login({ userDetails, setUserDetails }) {
                     </div>
                     <div>
                       {checked ? (
-                        <button className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
+                        <button className="hover:bg-green-600 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
                           Get Started!
                         </button>
                       ) : (
@@ -303,7 +303,7 @@ function Login({ userDetails, setUserDetails }) {
                       <p>Remain signed in </p>
                     </div>
                     <div>
-                      <button className="p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
+                      <button className="hover:bg-green-600 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
                         Continue
                       </button>
                     </div>
@@ -316,7 +316,7 @@ function Login({ userDetails, setUserDetails }) {
         {newUser ? (
           <div className="fixed right-0 h-full w-1/3 bg-purple-200 p-10">
             <p className="font-bold text-right text-purple-700 underline">
-              <button onClick={() => setNewUser(false)} className="underline">
+              <button onClick={() => setNewUser(false)} className="underline hover:text-green-600">
                 Sign In
               </button>
             </p>
@@ -347,7 +347,7 @@ function Login({ userDetails, setUserDetails }) {
         ) : (
           <div className="fixed right-0 h-full w-1/3 bg-purple-200 p-10">
             <p className="font-bold text-right text-purple-700 underline">
-              <button onClick={() => setNewUser(true)} className="underline">
+              <button onClick={() => setNewUser(true)} className="underline hover:text-green-600">
                 Sign Up
               </button>
             </p>

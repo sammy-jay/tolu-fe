@@ -36,11 +36,11 @@ function Home() {
                
             </div>
 
-            <div className='bg-red-30 my-10 px-4'>
-                <button onClick={()=> navigate("/log-in")} className='h bg-gray-950 p-3 rounded-md text-slate-100'>Create an account</button>
+            <div className='bg-red-30 my-10 px-4 w-2/3'>
+                <button onClick={()=> navigate("/log-in")} className='w-full text-2xl bg-gray-950 p-3 rounded-md text-slate-100 hover:bg-green-600'>Create an account</button>
             </div>
 
-            <div className='px-4'>
+            <div className='px-4 w-2/3'>
                 <div className='w-full h-52 bg-slate-200'>
 
                 </div>
@@ -64,7 +64,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className='px-4 py-10 bg-black'>
+            <div className='px-4 py-10 bg-black w-2/3'>
                 <div className='text-white text-center font-normal'>
                     <p className='text-2xl'>A one for all solution </p>
                     <p className='text-lg'>to keep you in <span className='text-red-500 font-serif'>power</span></p>
@@ -94,7 +94,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className='mx-5 my-10 space-y-5 rounded-xl p-5 bg-zinc-950'>
+            <div className='mx-10 my-10 space-y-5 rounded-xl p-5 bg-zinc-950 w-1/3'>
                 <p className='text-2xl font-bold text-white'>Ready to get started?</p>
                 <p className='text-slate-200 font-light'>Create an account now and get free access to all of our products and services.<br/>Our tool, your power.</p>
                 <div className='bg-red-30 my-10'>

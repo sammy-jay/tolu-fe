@@ -3,7 +3,7 @@ let dotEnv = import.meta.env
 
 function MakePayment() {
   const [paymentDetails, setPaymentDetails] = useState({
-    businessName: "",
+    businessEmail: "",
     email: "",
     invoiceNo: "",
     amount: "",
@@ -21,7 +21,7 @@ function MakePayment() {
   }
 
   let baseUrl;
-  if (dotEnv.MODE === "development") {
+  if (dotEnv.MODE === "development")  {
     baseUrl = dotEnv.VITE_DEV_URL;
   } else {
     baseUrl = dotEnv.VITE_PROD_URL;
@@ -94,8 +94,9 @@ function MakePayment() {
             </label>
             <input
               required
-              name="businessName"
-              value={paymentDetails.businessName}
+              type="email"
+              name="businessEmail"
+              value={paymentDetails.businessEmail}
               onChange={handleChange}
               className="bg-red-20 p-2 text-2xl border border-orange-500 rounded"
               placeholder="Enter Business/Company Name to pay to"
