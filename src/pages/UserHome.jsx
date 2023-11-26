@@ -810,7 +810,7 @@ function SideBar() {
                               <div className="bg-red-20 w-[16%] flex items-center justify-center ml-5">
                                 <div className="w-[20%] flex items-center justify-center">
                                   <div className="w-5 h-5 rounded-full bg-red-400 flex items-center justify-center overflow-hidden">
-                                    <img src={items.imageUrl} />
+                                    <img src={items.imageUrl} className="w-full h-full" />
                                   </div>
                                 </div>
 
