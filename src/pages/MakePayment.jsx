@@ -8,6 +8,7 @@ function MakePayment() {
     invoiceNo: "",
     amount: "",
   });
+
   const [paymentLink, setPaymentLink] = useState({
     link: "",
     notice: "",
@@ -35,7 +36,8 @@ function MakePayment() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setPaymentLink({ ...paymentLink, state: true });
+    try {
+      setPaymentLink({ ...paymentLink, state: true });
     let url = baseUrl + "/itrack/portal-payment";
     let response = await fetch(url, {
       method: "POST",
@@ -60,9 +62,10 @@ function MakePayment() {
         notice: data.message,
       });
     }
-    // setPaymentLink({...paymentLink, state: false})
-
-    // alert(JSON.stringify(paymentDetails));
+    } catch(error) {
+      console.log(error)
+    }
+    
   }
   return (
     <div>
