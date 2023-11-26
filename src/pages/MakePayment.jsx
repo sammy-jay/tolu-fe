@@ -108,7 +108,7 @@ function MakePayment() {
           iTrack
         </h1>
         <p className="text-2xl font-black uppercase">
-          - hosted payment gateway
+          - pay
         </p>
       </div>
       <form
@@ -183,7 +183,7 @@ function MakePayment() {
               type="submit"
               className="w-full p-3 bg-green-500 text-2xl rounded-lg text-white font-bold"
             >
-              Make Payment
+              Generate Payment Link
             </button>
           </div>
         </div>
