@@ -37,7 +37,7 @@ function Home() {
             </div>
 
             <div className='bg-red-30 my-10 px-4 w-2/3'>
-                <button onClick={()=> navigate("/log-in")} className='w-full text-2xl bg-gray-950 p-3 rounded-md text-slate-100 hover:bg-green-600'>Create an account</button>
+                <button onClick={()=> navigate("/log-in")} className='w-full text-2xl bg-gray-950 p-3 rounded-md text-slate-100 hover:bg-green-600 active:bg-green-800'>Create an account</button>
             </div>
 
             <div className='px-4 w-2/3'>

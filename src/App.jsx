@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
 import GeneratePLink from './pages/GeneratePLink';
-let dotEnv = import.meta.env;
+
 
 
 

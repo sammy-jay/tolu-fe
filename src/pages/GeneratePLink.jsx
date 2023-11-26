@@ -38,34 +38,33 @@ function GeneratePLink() {
     e.preventDefault();
     try {
       setPaymentLink({ ...paymentLink, state: true });
-    let url = baseUrl + "/itrack/portal-payment";
-    let response = await fetch(url, {
-      method: "POST",
-      headers: { 'Content-Type': "application/json" },
-      body: JSON.stringify(paymentDetails),
-    });
-    let data = await response.json();
-    // alert(data.message)
-    if (response.status === 200) {
-      setPaymentLink({
-        ...paymentLink,
-        state: false,
-        notice: "",
-        link: data.message,
+      let url = baseUrl + "/itrack/portal-payment";
+      let response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(paymentDetails),
       });
+      let data = await response.json();
+      // alert(data.message)
+      if (response.status === 200) {
+        setPaymentLink({
+          ...paymentLink,
+          state: false,
+          notice: "",
+          link: data.message,
+        });
+      }
+      if (response.status === 201) {
+        setPaymentLink({
+          ...paymentLink,
+          state: false,
+          link: "",
+          notice: data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
-    if (response.status === 201) {
-      setPaymentLink({
-        ...paymentLink,
-        state: false,
-        link: "",
-        notice: data.message,
-      });
-    }
-    } catch(error) {
-      console.log(error)
-    }
-    
   }
   return (
     <div>
@@ -110,9 +109,7 @@ function GeneratePLink() {
         <h1 className="px-5 py-3 text-2xl font-black bg-orange-600 w-32 rounded-xl -rotate-12 text-center">
           iTrack
         </h1>
-        <p className="text-2xl font-black uppercase">
-          - pay
-        </p>
+        <p className="text-2xl font-black uppercase">- pay</p>
       </div>
       <form
         id="paymentForm"
