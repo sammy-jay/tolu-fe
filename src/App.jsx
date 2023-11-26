@@ -3,11 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Customers from "./pages/Customers";
 import SignUp from "./pages/SignUp";
-import MakePayment from "./pages/MakePayment";
+
 import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
 import io from 'socket.io-client'
+import MakePayment from './pages/MakePayment';
 let dotEnv = import.meta.env;
 
 
@@ -27,7 +28,7 @@ function App() {
     businessEmail: ""
   })
 
-  
+
 
 
 
@@ -36,11 +37,10 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/customers" element={<Customers />} />
       <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/make-payment" element={<MakePayment />} />
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/user/home" element={<UserHome />} />
-      
+      <Route path="/make-payment" element={<MakePayment />} />
     </Routes>
   )
 }

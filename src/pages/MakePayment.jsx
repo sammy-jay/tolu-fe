@@ -84,17 +84,19 @@ function MakePayment() {
         </p>
       </div>
       <form
+      id="paymentForm"
         onSubmit={handleSubmit}
         className="w-2/3 mx-auto bg-red-20 my-10 py-10"
       >
         <div className="w-2/3 mx-auto bg-blue-40 space-y-5">
           <div className="flex flex-col">
-            <label htmlFor="businessName" className="font-semibold text-2xl">
+            <label htmlFor="businessEmail" className="font-semibold text-2xl">
               Payment to whom:
             </label>
             <input
               required
               type="email"
+              id="businessEmail"
               name="businessEmail"
               value={paymentDetails.businessEmail}
               onChange={handleChange}
@@ -108,7 +110,10 @@ function MakePayment() {
             </label>
             <input
             required
+            type="email"
+            id="email"
               name="email"
+              autoComplete="on"
               value={paymentDetails.email}
               onChange={handleChange}
               className="bg-red-20 p-2 text-2xl border border-orange-500 rounded"
@@ -121,6 +126,8 @@ function MakePayment() {
             </label>
             <input
             required
+            type="text"
+            id="invoiceNo"
               name="invoiceNo"
               value={paymentDetails.invoiceNo}
               onChange={handleChange}
@@ -134,6 +141,8 @@ function MakePayment() {
             </label>
             <input
             required
+            type="text"
+            id="amount"
               name="amount"
               value={paymentDetails.amount}
               onChange={handleChange}
