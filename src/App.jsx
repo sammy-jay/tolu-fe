@@ -40,7 +40,7 @@ function App() {
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/user/home" element={<UserHome />} />
-      <Route path="/make-payment" element={<MakePayment />} />
+      <Route path="/itrack-pay" element={<MakePayment />} />
     </Routes>
   )
 }
