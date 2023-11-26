@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 let dotEnv = import.meta.env;
 
 function ExpandSideBar({
@@ -15,13 +16,22 @@ function ExpandSideBar({
   customersNav,
 }) {
 
+  let baseUrl, url;
+  if (dotEnv.MODE === "development") {
+    baseUrl = "http://localhost:3000";
+  } else {
+    baseUrl = "https://itrack-server.vercel.app";
+  }
+
+ 
+
   return (
     <div className="fixed z-20 left-0 top-0 h-full w-[20%] bg-slate-200">
       {/* name, logo */}
       <div className="relative border-b border-slate-900">
         <div className="relative w-[70%] ml-5 flex justify-start gap-[5%] bg-yellow-40 my-8 ">
           <div>
-            <div className="w-12 h-12 bg-blue-400 rounded-xl"></div>
+            <div className="w-12 h-12 bg-blue-400 rounded-xl cursor-pointer"></div>
           </div>
           <p className="text-black text-[2rem]">iTrack</p>
         </div>
@@ -323,7 +333,7 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
   );
 }
 
-function SideBar() {
+function SideBar({due, setDue}) {
   const [user, setUser] = useState("");
   const [navItems, setNavItems] = useState("Dashboard");
   const [customersNav, setCustomersNav] = useState("");
@@ -707,10 +717,20 @@ function SideBar() {
             </div>
           </div>
           <div className="flex items-center gap-2 justify-end bg-red-40 w-[35%]">
-            <div className="w-10 h-10 bg-red-500"></div>
-            <div className="w-14 h-14 rounded-full bg-slate-200"></div>
+            <div className="w-10 h-10 bg-red-40 flex items-center justify-center">
+              <div className="relative w-full h-full bg-slate-100 flex items-center justify-center rounded-full shadow shadow-slate-400">
+                {!(due.length > 1) && <div className="top-2 right-2 absolute w-3 h-3 rounded-full bg-red-700"></div>}
+                <NotificationsNoneIcon sx={{fontSize: 30}}/>
+              </div>
+            </div>
+            <div className="relative w-14 h-14 rounded-full bg-slate-400 flex items-center justify-center">
+              <div className="top-0 bottom-0 bg-slate-800 z-10 absolute w-5 h-5 rounded-full p-1">
+                <div className="w-full h-full bg-green-600 rounded-full"></div>
+              </div>
+              <p className="text-4xl font-medium text-slate-300">{user.firstName[0] + user.lastName[0] }</p>
+            </div>
             <div>
-              <h2 className="font-semibold text-2xl text-gray-950">
+              <h2 className="font-semibold text-xl text-gray-950">
                 {user.firstName + " " + user.lastName}!
               </h2>
               <p className="text-slate-500 font-normal text-base">

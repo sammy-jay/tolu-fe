@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
 import GeneratePLink from './pages/GeneratePLink';
+let dotEnv = import.meta.env
 
 
 
@@ -26,10 +27,33 @@ function App() {
     businessPhone: "",
     businessEmail: ""
   })
+  const [due, setDue] = useState([])
 
+  // alert(dotEnv.MODE)
 
+  let baseUrl;
+  if (dotEnv.MODE === "development") {
+    baseUrl = "http://localhost:3000";
+  } else {
+    baseUrl = "https://itrack-server.vercel.app";
+  }
 
+  async function sendEmit() {
+    try {
+      let url = baseUrl + "/itrack/emit"
+      let response = await fetch(url)
+      let data = await response.json()
+      setDue(data.message)
+      // alert(data.message)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
+  setInterval(()=> {
+    sendEmit()
+  },60000)
+ 
 
   return (
     <Routes>
@@ -38,7 +62,7 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
-      <Route path="/user/home" element={<UserHome />} />
+      <Route path="/user/home" element={<UserHome setDue={setDue} due={due} />} />
       <Route path="/generate-link" element={<GeneratePLink />} />
     </Routes>
   )
