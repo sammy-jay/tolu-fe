@@ -41,7 +41,7 @@ function MakePayment() {
     let url = baseUrl + "/itrack/portal-payment";
     let response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': "application/json" },
       body: JSON.stringify(paymentDetails),
     });
     let data = await response.json();
