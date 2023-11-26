@@ -454,9 +454,13 @@ function SideBar() {
 
 
   useEffect(() => {
-    let currentUser = localStorage.getItem("currentUser");
+    
     try {
+      let currentUser = localStorage.getItem("currentUser");
       currentUser = JSON.parse(currentUser);
+      if (!currentUser.firstName) {
+        navigate("/log-in");
+      }
       setUser(currentUser);
     } catch (error) {
       navigate("/log-in");

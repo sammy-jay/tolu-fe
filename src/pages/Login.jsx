@@ -206,7 +206,7 @@ function Login({ userDetails, setUserDetails }) {
                     </div>
                     <div>
                       {checked ? (
-                        <button className="hover:bg-green-600 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
+                        <button className="hover:bg-green-600 active:bg-green-800 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
                           Get Started!
                         </button>
                       ) : (
@@ -303,7 +303,7 @@ function Login({ userDetails, setUserDetails }) {
                       <p>Remain signed in </p>
                     </div>
                     <div>
-                      <button className="hover:bg-green-600 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
+                      <button className="hover:bg-green-600 active:bg-green-800 p-2 text-center w-full bg-purple-600 text-white text-lg rounded-lg">
                         Continue
                       </button>
                     </div>

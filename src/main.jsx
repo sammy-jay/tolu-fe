@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 // alert(window.outerWidth)
 
 const screenHeight = window.outerHeight >= 800
-const screenWidth = window.outerWidth >= 1280
+const screenWidth = window.outerWidth >= 1000
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
