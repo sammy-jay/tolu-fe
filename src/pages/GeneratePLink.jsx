@@ -129,7 +129,7 @@ function GeneratePLink() {
               value={paymentDetails.businessEmail}
               onChange={handleChange}
               className="bg-red-20 p-2 text-2xl border border-orange-500 rounded"
-              placeholder="Enter Business/Company Name to pay to"
+              placeholder="Enter Business/Company Email to pay to"
             />
           </div>
           <div className="flex flex-col">
