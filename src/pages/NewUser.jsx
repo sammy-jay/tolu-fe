@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import login_man from "../images/login_man.png"
+import itrack_logo from "../images/itrack_logo.png"
 let dotEnv = import.meta.env
 
 function NewUser({ userDetails, setUserDetails }) {
@@ -19,8 +21,7 @@ function NewUser({ userDetails, setUserDetails }) {
   }
 
   async function handleNext(param) {
-    alert(param)
-   
+    console.log(param)
           try {
             let url = baseUrl + "/itrack/create-user";
             // alert(url);
@@ -31,12 +32,11 @@ function NewUser({ userDetails, setUserDetails }) {
             });
             let data = await response.json();
             if (response.status === 200) {
-              alert(data.message)
+              alert("User Created Successfully!")
               localStorage.setItem("currentUser", JSON.stringify(data.message));
             } else{
-              alert(JSON.stringify(data))
+              alert(data.message)
             }
-            alert("CY");
             navigate("/log-in");
           } catch (error) {
             console.log("errorKKL");
@@ -54,7 +54,9 @@ function NewUser({ userDetails, setUserDetails }) {
           <div className="w-1/3 h-60 mx-auto bg-blue-30">
             <div className="w-[90%] mx-auto p-5 bg-slate-50 rounded-lg shadow shadow-slate-300 space-y-3">
               <div className="flex justify-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-purple-800"></div>
+                <div className="w-8 h-8 rounded-lg bg-purple-80 flex items-center justify-center">
+                  <img src={itrack_logo} />
+                </div>
                 <p className="font-semibold text-xl">iTrack</p>
               </div>
               <p className="font-semibold text-center">
@@ -95,7 +97,9 @@ function NewUser({ userDetails, setUserDetails }) {
                 <p className="font-semibold text-slate-700 text-xl">
                   <button onClick={() => navigate("/")}>
                     <div className="flex justify-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-purple-800"></div>
+                      <div className="w-8 h-8 rounded-lg bg-purple-80 flex justify-center items-center">
+                        <img src={itrack_logo} />
+                      </div>
                       <p className="font-semibold text-xl">iTrack</p>
                     </div>
                   </button>
@@ -301,7 +305,10 @@ function NewUser({ userDetails, setUserDetails }) {
               <p className="font-bold text-right text-red-500 underline">
                 <button className="">Log out</button>
               </p>
-              <div className="relative mt-20 w-[80%] mx-auto bg-red-200 h-1/2 rounded-r-xl">
+              <div className="relative mt-20 w-[80%] mx-auto bg-red-200 h-1/2 ">
+              <div className="w-full h-full overflow-hidden rounded-r-xl">
+                <img src={login_man} />
+              </div>
                 <div className="flex pt-2 pl-2 gap-5 absolute left-20 bottom-10 h-14 rounded-l-lg w-full bg-slate-100">
                   <div className="w-7 h-7 rounded-full bg-purple-500"></div>
                   <div>
