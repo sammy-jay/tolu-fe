@@ -458,6 +458,9 @@ function SideBar({ due, setDue }) {
     }
     dateIssued = document.getElementById("dateIssue").value;
     dateDue = document.getElementById("dateDue").value;
+    if (!dateIssued || !dateDue ) {
+      return 1;
+    }
     let paidAmt = parseFloat(document.getElementById("paidStatus").value);
 
     if (paidAmt >= amountTotal) {
@@ -488,8 +491,7 @@ function SideBar({ due, setDue }) {
       });
       let data = await response.json();
       if (response.status === 200) {
-        alert(JSON.stringify(data.message));
-        alert("Invoice Craeted for Customer Successfully");
+        alert("Invoice Created for Customer Successfully");
         setNavItems("Customers");
         setCreateNewOptions({ ...createNewOptions, invoice: false });
       }
