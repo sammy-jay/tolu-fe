@@ -27,7 +27,8 @@ function App() {
     businessPhone: "",
     businessEmail: ""
   })
-  const [due, setDue] = useState([])
+  const [due, setDue] = useState("")
+
 
   // alert(dotEnv.MODE)
 
@@ -52,7 +53,7 @@ function App() {
 
   setInterval(()=> {
     sendEmit()
-  },60000)
+  },600000)
  
 
   return (
@@ -62,7 +63,7 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/log-in" element={<Login userDetails={userDetails} setUserDetails={setUserDetails} />} />
       <Route path="/new-user" element={<NewUser userDetails={userDetails} setUserDetails={setUserDetails} />} />
-      <Route path="/user/home" element={<UserHome setDue={setDue} due={due} />} />
+      <Route path="/user/home" element={<UserHome due={due} setDue={setDue}  />} />
       <Route path="/generate-link" element={<GeneratePLink />} />
     </Routes>
   )

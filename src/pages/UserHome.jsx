@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import customer_created from "../images/customer_created.png"
+import itrack_logo from "../images/itrack_logo.png"
+import dashboard_logo from "../images/dashboard_logo.png"
+import customer_logo from "../images/customer_logo.png"
+import transaction_logo from "../images/transaction_logo.png"
+import invoice_logo from "../images/invoice_logo.png"
+import createnew_logo from "../images/createnew_logo.png"
+import drawer_handle from "../images/drawer_handle.png"
+import dashboard_multi from "../images/dashboard_multi.png"
+
 let dotEnv = import.meta.env;
 
 function ExpandSideBar({
@@ -26,23 +36,23 @@ function ExpandSideBar({
  
 
   return (
-    <div className="fixed z-20 left-0 top-0 h-full w-[20%] bg-slate-200">
+    <div className="fixed z-20 left-0 top-0 h-full w-[20%] bg-slate-50">
       {/* name, logo */}
-      <div className="relative border-b border-slate-900">
-        <div className="relative w-[70%] ml-5 flex justify-start gap-[5%] bg-yellow-40 my-8 ">
+      <div className="relative border-b-[1px] border-slate-200">
+        <div className="relative w-[70%] ml-5 flex items-center justify-start gap-[5%] bg-yellow-40 my-8 ">
           <div>
-            <div className="w-12 h-12 bg-blue-400 rounded-xl cursor-pointer"></div>
+            <div className="flex items-center justify-center w-12 h-12 bg-blue-400 rounded-xl cursor-pointer">
+               <img src={itrack_logo} />
+            </div>
           </div>
-          <p className="text-black text-[2rem]">iTrack</p>
+          <p className="text-black font-bold text-[1.8rem]">iTrack</p>
         </div>
         <div
           onClick={() => setNavBarState("collapse")}
           className="absolute -right-5 top-0  bg-red-40 h-full mt-[2%]"
         >
-          <div className="h-10 w-10 rounded-full bg-slate-50 p-2">
-            <div className="w-full h-full rounded-full bg-purple-600 flex items-center justify-center text-slate-100">
-              <p>+</p>
-            </div>
+          <div className="flex items-center justify-center h-10 w-10 rounded-full bg-slate-50">
+           <img src={drawer_handle} />
           </div>
         </div>
       </div>
@@ -55,14 +65,16 @@ function ExpandSideBar({
             setNavItems("Dashboard");
             setCustomersNav("");
           }}
-          className={`relative flex items-center gap-[5%] hover:bg-red-300 p-2 rounded-lg ${
-            !(navItems === "Dashboard") ? "bg-none" : "bg-red-300"
+          className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
+            !(navItems === "Dashboard") ? "bg-none" : "bg-purple-200"
           }`}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
-          <p className="text-xl">Dashboard</p>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={dashboard_logo} />
+          </div>
+          <p className="text-xl font-light">Dashboard</p>
           {navItems === "Dashboard" && (
-            <div className="absolute top-0 w-2 h-full bg-red-300 -right-5 rounded-l-lg "></div>
+            <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
           )}
         </li>
         <li
@@ -71,14 +83,16 @@ function ExpandSideBar({
             getResponse("Customers");
             setCustomersNav("");
           }}
-          className={`relative flex items-center gap-[5%] hover:bg-red-300 p-2 rounded-lg ${
-            !(navItems === "Customers") ? "bg-none" : "bg-red-300"
+          className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
+            !(navItems === "Customers") ? "bg-none" : "bg-purple-200"
           }`}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
-          <p className="text-xl">Customers</p>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={customer_logo} />
+          </div>
+          <p className="text-xl font-light">Customers</p>
           {navItems === "Customers" && (
-            <div className="absolute top-0 w-2 h-full bg-red-300 -right-5 rounded-l-lg "></div>
+            <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
           )}
         </li>
         <li
@@ -87,15 +101,17 @@ function ExpandSideBar({
             getResponse("Transactions");
             setCustomersNav("");
           }}
-          className={`relative flex items-center gap-[5%] hover:bg-red-300 p-2 rounded-lg ${
-            !(navItems === "Transactions") ? "bg-none" : "bg-red-300"
+          className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
+            !(navItems === "Transactions") ? "bg-none" : "bg-purple-200"
           }`}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
-          <p className="text-xl">Transactions</p>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={transaction_logo} />
+          </div>
+          <p className="text-xl font-light">Transactions</p>
 
           {navItems === "Transactions" && (
-            <div className="absolute top-0 w-2 h-full bg-red-300 -right-5 rounded-l-lg "></div>
+            <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
           )}
         </li>
         {navItems === "Transactions" && (
@@ -160,38 +176,42 @@ function ExpandSideBar({
             getResponse("Invoices");
             setCustomersNav("");
           }}
-          className={`relative flex items-center gap-[5%] hover:bg-red-300 p-2 rounded-lg ${
-            !(navItems === "Invoices") ? "bg-none" : "bg-red-300"
+          className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
+            !(navItems === "Invoices") ? "bg-none" : "bg-purple-200"
           }`}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
-          <p className="text-xl">Invoices</p>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={invoice_logo} />
+          </div>
+          <p className="text-xl font-light">Invoices</p>
           {navItems === "Invoices" && (
-            <div className="absolute top-0 w-2 h-full bg-red-300 -right-5 rounded-l-lg "></div>
+            <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
           )}
         </li>
         <li
           onClick={() => {
             setNavItems("CreateNew");
           }}
-          className={`relative flex items-center gap-[5%] hover:bg-red-300 p-2 rounded-lg ${
-            !(navItems === "CreateNew") ? "bg-none" : "bg-red-300"
+          className={`relative flex items-center gap-[5%] hover:bg-purple-200 p-2 rounded-lg ${
+            !(navItems === "CreateNew") ? "bg-none" : "bg-purple-200"
           }`}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
-          <p className="text-xl">Create New</p>
+          <div className="flex ml-2 items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={createnew_logo} />
+          </div>
+          <p className="text-xl font-light">Create New</p>
 
           {navItems === "CreateNew1" && (
             <div>
               <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
               <p className="text-xl">Create New</p>
-              <div className="absolute top-0 w-2 h-full bg-red-300 -right-5 rounded-l-lg "></div>
+              <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
             </div>
           )}
 
           {navItems === "CreateNew" && (
             <>
-              <div className="absolute top-0 w-2 h-full bg-red-300 -right-5 rounded-l-lg "></div>
+              <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
               <div
                 id="createNewDiv"
                 className={`absolute top-0 w-2 h-full bg-red-60 -right-5 rounded-l-lg`}
@@ -255,12 +275,14 @@ function ExpandSideBar({
 
 function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
   return (
-    <div className="fixed z-20 left-0 top-0 h-full w-[5%] bg-slate-200">
+    <div className="fixed z-20 left-0 top-0 h-full w-[5%] bg-slate-50">
       {/* name, logo */}
       <div className="relative border-b border-slate-900">
         <div className="relative w-[70%] mx-2 flex justify-start gap-[5%] bg-yellow-40 my-8 ">
           <div>
-            <div className="w-12 h-12 bg-blue-400 rounded-xl"></div>
+            <div className="flex items-center justify-center w-12 h-12 bg-blue-40 rounded-xl">
+              <img src={itrack_logo} />
+            </div>
           </div>
           {/* <p className="text-black text-[2rem]">iTrack</p> */}
         </div>
@@ -268,10 +290,8 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
           onClick={() => setNavBarState("expand")}
           className="absolute -right-5 top-0  bg-red-40 h-full mt-[2%]"
         >
-          <div className="h-10 w-10 rounded-full bg-slate-50 p-2">
-            <div className="w-full h-full rounded-full bg-purple-600 flex items-center justify-center text-slate-100">
-              <p>+</p>
-            </div>
+          <div className="flex items-center justify-center h-10 w-10 rounded-full bg-slate-50">
+            <img src={drawer_handle} />
           </div>
         </div>
       </div>
@@ -282,50 +302,60 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
           onClick={() => setNavItems("Dashboard")}
           className={`relative flex items-center gap-[5%] p-2 rounded-lg `}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl">D</div>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={dashboard_logo} />
+          </div>
           {/* <p className="text-md">Dashboard</p> */}
           {navItems === "Dashboard" && (
-            <div className="absolute w-2 h-1/2 top-[25%] bg-red-300 -right-1 rounded-l-lg "></div>
+            <div className="absolute w-2 h-1/2 top-[25%] bg-purple-400 -right-1 rounded-l-lg "></div>
           )}
         </li>
         <li
           onClick={() => setNavItems("Customers")}
           className={`relative flex items-center gap-[5%] p-2 rounded-lg `}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl">C</div>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={customer_logo} />
+          </div>
           {/* <p className="text-xl">Customers</p> */}
           {navItems === "Customers" && (
-            <div className="absolute w-2 h-1/2 top-[25%] bg-red-300 -right-1 rounded-l-lg "></div>
+            <div className="absolute w-2 h-1/2 top-[25%] bg-purple-400 -right-1 rounded-l-lg "></div>
           )}
         </li>
         <li
           onClick={() => setNavItems("Transactions")}
           className={`relative flex items-center gap-[5%] p-2 rounded-lg `}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl">T</div>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={transaction_logo} /> 
+          </div>
           {/* <p className="text-xl">Transactions</p> */}
           {navItems === "Transactions" && (
-            <div className="absolute w-2 h-1/2 top-[25%] bg-red-300 -right-1 rounded-l-lg "></div>
+            <div className="absolute w-2 h-1/2 top-[25%] bg-purple-400 -right-1 rounded-l-lg "></div>
           )}
         </li>
         <li
           onClick={() => setNavItems("Invoices")}
           className={`relative flex items-center gap-[5%] p-2 rounded-lg `}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl">I</div>
+          <div className="flex items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={invoice_logo} />
+          </div>
           {/* <p className="text-xl">Invoices</p> */}
           {navItems === "Invoices" && (
-            <div className="absolute w-2 h-1/2 top-[25%] bg-red-300 -right-1 rounded-l-lg "></div>
+            <div className="absolute w-2 h-1/2 top-[25%] bg-purple-400 -right-1 rounded-l-lg "></div>
           )}
         </li>
         <li
           onClick={() => setNavItems("CreateNew")}
           className={`relative flex items-center gap-[5%] p-2 rounded-lg`}
         >
-          <div className="relative w-9 h-9 bg-purple-400 rounded-xl"></div>
+          <div className="flex ml-2 items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
+            <img src={createnew_logo} />
+          </div>
           {/* <p className="text-xl">Create New</p> */}
           {navItems === "CreateNew" && (
-            <div className="absolute w-2 h-1/2 top-[25%] bg-red-300 -right-1 rounded-l-lg "></div>
+            <div className="absolute w-2 h-1/2 top-[25%] bg-purple-400 -right-1 rounded-l-lg "></div>
           )}
         </li>
       </ul>
@@ -716,30 +746,139 @@ function SideBar({due, setDue}) {
               />
             </div>
           </div>
-          <div className="flex items-center gap-2 justify-end bg-red-40 w-[35%]">
+          <div className="relative flex items-center gap-3 justify-end bg-red-40 w-[35%]">
+            {newCustomer &&
+            <div className="flex items-center justify-evenly absolute w-full right-5 h-14 rounded-lg z-50 bg-slate-50 shadow shadow-slate-400 top-full">
+              <div className="w-[15%] bg-red-30 flex items-center justify-center">
+                <div className="w-2/3 h-1/2">
+                  <img src={customer_created} />
+                </div>
+              </div>
+              <div className="w-[85%] bg-red-30 text-green-500">
+                <p className="text-[15px] font-bold">Customer created</p>
+                <p className="text-[11px]">A new customer "{newCustomer.firstName + " " + newCustomer.lastName}" has been created </p>
+              </div>
+            </div>}
+
             <div className="w-10 h-10 bg-red-40 flex items-center justify-center">
               <div className="relative w-full h-full bg-slate-100 flex items-center justify-center rounded-full shadow shadow-slate-400">
-                {!(due.length > 1) && <div className="top-2 right-2 absolute w-3 h-3 rounded-full bg-red-700"></div>}
+                { !(due === "") && <div className="top-2 right-2 absolute w-3 h-3 rounded-full bg-red-700"></div>}
                 <NotificationsNoneIcon sx={{fontSize: 30}}/>
               </div>
             </div>
-            <div className="w-14 h-14 rounded-full bg-slate-200"></div>
+            <div className="relative w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center">
+              <div className="absolute -bottom-0 -right-1 w-5 h-5 p-1 rounded-full bg-slate-100">
+                <div className="w-full h-full bg-green-600 rounded-full"></div>
+              </div>
+              { user && <p className="text-3xl text-slate-500">{user.firstName[0] + user.lastName[0]} </p>}
+            </div>
             <div>
               <h2 className="font-semibold text-xl text-gray-950">
                 {user.firstName + " " + user.lastName}!
               </h2>
               <p className="text-slate-500 font-normal text-base">
-                Finesse Stores
+                {user.businessName ? <p>{user.businessName}</p> : "Finesse Store"}
               </p>
             </div>
-            <div>!</div>
+            <div></div>
           </div>
         </div>
         <div
-          className={`relative bg-gray-200 h-full flex pt-20 justify-center`}
+          className={`relative bg-gray-100 h-full flex pt-20 justify-center`}
         >
           {navItems === "Dashboard" && (
-            <p className="text-5xl text-red-600 font-black">Dashboard</p>
+            <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3">
+              <div className="w-full h-full relative">
+                <div className=" bg-yellow-30 gap-5 flex">
+                  <div className="w-[25%] h-96 flex flex-col rounded-md overflow-hidden bg-slate-50 shadow shadow-slate-300">
+                    <div className="bg-[#8347E7] h-36" >
+                      <img src={dashboard_multi} className="h-full w-full object-fit" />
+                    </div>
+                    <div className="pt-2 px-5">
+                      <p className="text-black font-bold text-xl">Welcome!</p>
+                      <p className="font-light text-base text-gray-600">iTrack helps you manage all customer payments related to your small business! Send Invoices and debt reminders while avoiding misleading double entries!</p>
+                    </div>
+                    <div className="py-4 px-5">
+                      <div className="float-right w-1/2">
+                      <button className="p-2 bg-[#8347E7] w-full text-slate-200 font-light">Create New</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-[72%] bg-red-30">
+                    <div className="flex items-center justify-between">
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                        <p className="font-light text-sm">Total Customers</p>
+                        <p className="font-bold">0</p>
+                        <p className="text-lime-400">0% </p>
+                      </div>
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                        <p className="font-light text-sm">Total Customers</p>
+                        <p className="font-bold">0</p>
+                        <p className="text-lime-400">0% </p>
+                      </div>
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                        <p className="font-light text-sm">Total Customers</p>
+                        <p className="font-bold">0</p>
+                        <p className="text-lime-400">0% </p>
+                      </div>
+                      <div className="w-[23%] h-32 bg-slate-50 rounded-lg py-5 px-4 space-y-2">
+                        <p className="font-light text-sm">Total Customers</p>
+                        <p className="font-bold">0</p>
+                        <p className="text-lime-400">0% </p>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="py-2 text-black font-bold text">What would you like to get started with ?</p>
+                      <div className="flex justify-between h-full relative">
+                        <div className="relative w-[32%] h-[13.5rem] bg-slate-50 rounded-lg py-4">
+                          <div className="w-10 h-10 rounded bg-red-300 right-3 absolute"></div>
+                          <div className=" rounded bg-red-30 left-3 right-3 absolute bottom-5 ">
+                            <div>
+                              <p className="font-bold text-base">New Customer</p>
+                              <div className="flex h-10">
+                                <div className="w-[80%] bg-red-800">
+                                </div>
+                                <div className="w-[20%] bg-blue-400">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative w-[32%] h-[13.5rem] bg-slate-50 rounded-lg py-4">
+                        <div className="w-10 h-10 rounded bg-red-300 right-3 absolute"></div>
+                        <div className=" rounded bg-red-30 left-3 right-3 absolute bottom-5 ">
+                          <div>
+                            <p className="font-bold text-base">New Customer</p>
+                            <div className="flex h-10">
+                              <div className="w-[80%] bg-red-800">
+                              </div>
+                              <div className="w-[20%] bg-blue-400">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="relative w-[32%] h-[13.5rem] bg-slate-50 rounded-lg py-4">
+                        <div className="w-10 h-10 rounded bg-red-300 right-3 absolute"></div>
+                        <div className=" rounded bg-red-30 left-3 right-3 absolute bottom-5 ">
+                          <div>
+                            <p className="font-bold text-base">New Customer</p>
+                            <div className="flex h-10">
+                              <div className="w-[80%] bg-red-800">
+                              </div>
+                              <div className="w-[20%] bg-blue-400">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
           {navItems === "Customers" && !newCustomer.firstName && (
             <div className="">

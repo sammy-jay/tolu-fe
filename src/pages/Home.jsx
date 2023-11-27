@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 import { useNavigate } from 'react-router-dom';
+import itrack_logo from '../images/itrack_logo.png'
 
 function Home() {
     const [load, setLoad] = useState(true)
@@ -13,14 +14,14 @@ function Home() {
   return (
     <div>
         { load && <Loading />}
-        <header className='fixed top-0 left-0 w-full flex justify-between px-2 py-5 bg-white bg-opacity-80'>
+        <header className='fixed top-0 left-0 w-full flex justify-start gap-5 items-center px-5 py-5 bg-white bg-opacity-80'>
             {/* logo */}
-            <div className='bg-blue-300 w-20'>
-                iTrack
+            <div className='flex items-center justify-center bg-blue-30 w-14 h-14'>
+                <img src={itrack_logo} />
             </div>
-            <nav className='bg-red-300 w-20'>
+            <nav className='bg-red-30 w-20'>
+                <p className='font-bold text-3xl'>iTrack</p>
                 
-                iTrack
             </nav>
         </header>
         
@@ -36,11 +37,11 @@ function Home() {
                
             </div>
 
-            <div className='bg-red-30 my-10 px-4 w-2/3'>
+            <div className='bg-red-30 my-10 px-4 xl:w-2/3'>
                 <button onClick={()=> navigate("/log-in")} className='w-full text-2xl bg-gray-950 p-3 rounded-md text-slate-100 hover:bg-green-600 active:bg-green-800'>Create an account</button>
             </div>
 
-            <div className='px-4 w-2/3'>
+            <div className='px-4 xl:w-2/3'>
                 <div className='w-full h-52 bg-slate-200'>
 
                 </div>
@@ -64,7 +65,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className='px-4 py-10 bg-black w-2/3'>
+            <div className='px-4 py-10 bg-black xl:w-2/3'>
                 <div className='text-white text-center font-normal'>
                     <p className='text-2xl'>A one for all solution </p>
                     <p className='text-lg'>to keep you in <span className='text-red-500 font-serif'>power</span></p>
@@ -94,7 +95,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className='mx-10 my-10 space-y-5 rounded-xl p-5 bg-zinc-950 w-1/3'>
+            <div className='mx-10 my-10 space-y-5 rounded-xl p-5 bg-zinc-950 xl:w-1/3'>
                 <p className='text-2xl font-bold text-white'>Ready to get started?</p>
                 <p className='text-slate-200 font-light'>Create an account now and get free access to all of our products and services.<br/>Our tool, your power.</p>
                 <div className='bg-red-30 my-10'>
