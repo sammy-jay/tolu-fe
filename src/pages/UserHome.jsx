@@ -33,11 +33,12 @@ function ExpandSideBar({
   handleCreateNew,
   customersNav,
 }) {
+
   let baseUrl, url;
   if (dotEnv.MODE === "development") {
-    baseUrl = "http://localhost:3000";
+    baseUrl = dotEnv.VITE_DEV_URL;
   } else {
-    baseUrl = "https://itrack-server.vercel.app";
+    baseUrl = dotEnv.VITE_PROD_URL;
   }
 
   return (
@@ -415,11 +416,12 @@ function SideBar({ due, setDue }) {
 
   const [dbItems, setDbItems] = useState("Invoices");
 
+
   let baseUrl, url;
   if (dotEnv.MODE === "development") {
-    baseUrl = "http://localhost:3000";
+    baseUrl = dotEnv.VITE_DEV_URL;
   } else {
-    baseUrl = "https://itrack-server.vercel.app";
+    baseUrl = dotEnv.VITE_PROD_URL;
   }
 
   function handleAddItem(e) {
