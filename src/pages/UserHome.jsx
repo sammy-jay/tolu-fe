@@ -370,6 +370,8 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
 
 function SideBar({ due, setDue }) {
   const navigate = useNavigate();
+  const [showDues, setShowDues] = useState(false);
+  const [showInvoice, setShowInvoice] = useState(false);
   const [user, setUser] = useState("");
   const [navItems, setNavItems] = useState("Dashboard");
   const [customersNav, setCustomersNav] = useState("");
@@ -394,6 +396,9 @@ function SideBar({ due, setDue }) {
     description: "",
     imageUrl: "",
   });
+
+  // alert(JSON.stringify(due))
+
   const [loadingState, setLoadingState] = useState(false);
   const [createNewOptions, setCreateNewOptions] = useState({
     customer: false,
@@ -458,7 +463,7 @@ function SideBar({ due, setDue }) {
     }
     dateIssued = document.getElementById("dateIssue").value;
     dateDue = document.getElementById("dateDue").value;
-    if (!dateIssued || !dateDue ) {
+    if (!dateIssued || !dateDue) {
       return 1;
     }
     let paidAmt = parseFloat(document.getElementById("paidStatus").value);
@@ -704,7 +709,6 @@ function SideBar({ due, setDue }) {
   }
 
   function handleTransact(param) {
-    // alert(param)
     if (param === "all") {
       let localTransactions = localStorage.getItem("transactions");
       if (localTransactions) {
@@ -728,6 +732,7 @@ function SideBar({ due, setDue }) {
     }
     if (param === "completedPayments") {
       let localTransactions = localStorage.getItem("transactions");
+      let newTransact;
       if (
         localTransactions &&
         JSON.parse(localTransactions) !== "No Transaction Recorded"
@@ -864,12 +869,34 @@ function SideBar({ due, setDue }) {
               </div>
             )}
 
-            <div className="w-10 h-10 bg-red-40 flex items-center justify-center">
-              <div className="relative w-full h-full bg-slate-100 flex items-center justify-center rounded-full shadow shadow-slate-400">
+            <div className="z-50 relative w-10 h-10 bg-red-40 flex items-center justify-center">
+              <div
+                onClick={() => setShowDues(!showDues)}
+                className="relative w-full h-full bg-slate-100 hover:bg-slate-300 flex items-center justify-center rounded-full shadow shadow-slate-400"
+              >
                 {!(due === "") && (
                   <div className="top-2 right-2 absolute w-3 h-3 rounded-full bg-red-700"></div>
                 )}
                 <NotificationsNoneIcon sx={{ fontSize: 30 }} />
+              </div>
+              <div className="absolute -bottom-16 -right-28 z-50">
+                {showDues &&
+                  due !== "" &&
+                  due.map((item) => {
+                    return (
+                      <div className="flex w-80 justify-between h-10 items-center p-2 text-xl bg-slate-50">
+                        <div className="w-4 h-4 rounded-full bg-red-600 flex items-center justify-center">
+                          !
+                        </div>
+                        <div>
+                          <p classNme="text-red-600">Unpaid Invoices</p>
+                          <p className=" text-red-600 text-[15px]">
+                            You still have unpaid invoices for {item.customer}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
             <div className="relative w-14 h-14 rounded-full bg-slate-200 flex items-center justify-center">
@@ -885,6 +912,8 @@ function SideBar({ due, setDue }) {
             <div>
               <h2 className="font-semibold text-xl text-gray-950">
                 {user.firstName + " " + user.lastName}!
+                {/* {sue.length}
+                {typeof(due)} */}
               </h2>
               <p className="text-slate-500 font-normal text-base">
                 {user.businessName ? (
@@ -901,7 +930,7 @@ function SideBar({ due, setDue }) {
           className={`relative bg-gray-100 h-full flex pt-20 justify-center`}
         >
           {navItems === "Dashboard" && (
-            <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-50 p-3">
+            <div className="bg-blue-40 absolute top-0 left-0 h-full w-full overflow-scroll z-40 p-3">
               <div className="w-full h-full relative">
                 <div className=" bg-yellow-30 gap-5 flex">
                   <div className="w-[25%] h-96 flex flex-col rounded-md overflow-hidden bg-slate-50 shadow shadow-slate-300">
@@ -921,7 +950,12 @@ function SideBar({ due, setDue }) {
                     </div>
                     <div className="py-4 px-5">
                       <div className="float-right w-1/2">
-                        <button className="p-2 bg-[#8347E7] w-full text-slate-200 font-light">
+                        <button
+                          onClick={() => {
+                            setNavItems("CreateNew");
+                          }}
+                          className="p-2 bg-[#8347E7] w-full text-slate-200 font-light"
+                        >
                           Create New
                         </button>
                       </div>
@@ -976,11 +1010,16 @@ function SideBar({ due, setDue }) {
                               </p>
                               <div className="flex h-10">
                                 <div className="w-[80%] bg-red-80">
-                                  <p className="font-light text-red-900">
+                                  <p className="font-light text-red-90">
                                     Quickly create profiles for your customers!
                                   </p>
                                 </div>
-                                <div className="flex justify-center items-center w-[20%] bg-blue-40">
+                                <div
+                                  onClick={() => {
+                                    setNavItems("CreateNew");
+                                  }}
+                                  className="flex justify-center items-center w-[20%] bg-blue-40"
+                                >
                                   <img src={logo_blue} />
                                 </div>
                               </div>
@@ -996,9 +1035,16 @@ function SideBar({ due, setDue }) {
                               <p className="font-bold text-base">Get Paid</p>
                               <div className="flex h-10">
                                 <div className="w-[80%] bg-red-80">
-                                  <p>Send an invoice to a owing customer!</p>
+                                  <p className="font-light">
+                                    Send an invoice to a owing customer!
+                                  </p>
                                 </div>
-                                <div className="flex justify-center items-center w-[20%] bg-blue-40">
+                                <div
+                                  onClick={() => {
+                                    setNavItems("Invoices");
+                                  }}
+                                  className="flex justify-center items-center w-[20%] bg-blue-40"
+                                >
                                   <img src={logo_blue} />
                                 </div>
                               </div>
@@ -1020,7 +1066,16 @@ function SideBar({ due, setDue }) {
                                     Quickly record transaction!
                                   </p>
                                 </div>
-                                <div className="flex justify-center items-center w-[20%] bg-blue-40">
+                                <div
+                                  onClick={() => {
+                                    setNavItems("Invoices");
+                                    setCreateNewOptions({
+                                      ...createNewOptions,
+                                      invoice: true,
+                                    });
+                                  }}
+                                  className="flex justify-center items-center w-[20%] bg-blue-40"
+                                >
                                   <img src={logo_blue} />
                                 </div>
                               </div>
@@ -1111,12 +1166,13 @@ function SideBar({ due, setDue }) {
                           <div className="flex gap-5">
                             <div>
                               <button
-                                onClick={() =>
+                                onClick={() => {
+                                  setNavItems("Invoices");
                                   setCreateNewOptions({
                                     ...createNewOptions,
                                     invoice: true,
-                                  })
-                                }
+                                  });
+                                }}
                                 className="hover:bg-green-500 p-1 w-40 rounded-md text-slate-200 font-normal bg-purple-700 text-base"
                               >
                                 Create Invoice
@@ -1299,7 +1355,10 @@ function SideBar({ due, setDue }) {
                         </div>
                         <div className="flex gap-5">
                           <div>
-                            <button className="p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 text-lg">
+                            <button
+                              onClick={() => setNavItems("CreateNew")}
+                              className="p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 hover:bg-green-600 active:bg-green-800 text-lg"
+                            >
                               Create Customer
                             </button>
                           </div>
@@ -1561,7 +1620,16 @@ function SideBar({ due, setDue }) {
                         </div>
                         <div className="flex gap-5">
                           <div>
-                            <button className="p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 text-lg">
+                            <button
+                              onClick={() => {
+                                setNavItems("Invoices");
+                                setCreateNewOptions({
+                                  ...createNewOptions,
+                                  invoice: true,
+                                });
+                              }}
+                              className="p-2 w-40 rounded-md text-slate-200 font-normal bg-purple-700 hover:bg-green-600 active:bg-green-800 text-lg"
+                            >
                               New Transaction
                             </button>
                           </div>
@@ -2049,6 +2117,32 @@ function SideBar({ due, setDue }) {
                         {navRes.transaction.map((items, index) => {
                           return (
                             <div className="border-b-[1px] border-slate-300 px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
+                              { showInvoice && (
+                                <div onClick={()=> setShowInvoice(false)} className="absolute flex items-center justify-center bg-red-200 left-0 h-full w-full">
+                                  <div>
+                                    <div classNmae="flex justify-between bg-red-800">
+                                      <div>
+                                        <p>
+                                          Seller Name:{" "}
+                                          {
+                                            JSON.parse(items.seller)
+                                              .businessName
+                                          }{" "}
+                                        </p>
+                                        <p>
+                                          Seller Mail:{" "}
+                                          {JSON.parse(items.seller).email}{" "}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p>Invoice No: {items.invoiceId} </p>
+                                        <p>Date Issues: {items.dateIssued}</p>
+                                        <p>Date Due: {items.duePayDate} </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>)
+                              }
                               <div>
                                 <input type="checkbox" />
                               </div>
@@ -2110,7 +2204,7 @@ function SideBar({ due, setDue }) {
                                     <div>
                                       <DeleteOutlineIcon />
                                     </div>
-                                    <div>
+                                    <div onClick={()=> setShowInvoice(true)}>
                                       <RemoveRedEyeOutlinedIcon />
                                     </div>
                                     <div>

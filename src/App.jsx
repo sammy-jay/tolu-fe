@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Customers from "./pages/Customers";
 import SignUp from "./pages/SignUp";
-
+import io from 'socket.io-client'
 import Login from "./pages/Login";
 import NewUser from "./pages/NewUser";
 import UserHome from "./pages/UserHome";
@@ -39,21 +39,50 @@ function App() {
     baseUrl = "https://itrack-server.vercel.app";
   }
 
-  async function sendEmit() {
-    try {
-      let url = baseUrl + "/itrack/emit"
-      let response = await fetch(url)
-      let data = await response.json()
-      setDue(data.message)
-      // alert(data.message)
-    } catch(error) {
-      console.log(error)
-    }
-  }
+  const socket = io(baseUrl)
 
-  setInterval(()=> {
-    sendEmit()
-  },600000)
+  useEffect(()=> {
+    socket.on("message", (data)=> {
+      // console.log(data.dueArr)
+      // alert(JSON.stringify(data.message))
+      console.log(data)
+      if (data.dueArr !== "") {
+        // alert(`due: ${JSON.stringify(due)}`)
+        // alert(`msg: ${JSON.stringify(data.message)}`)
+        if (due === data.message) {
+          alert("same")
+        } else {
+          // alert(data.message[0].customer)
+          setDue(data.message)
+        }
+        // setDue(data.message)
+        
+        // alert(typeof(data.message))
+        // alert(data.message.length)
+        // alert("k")
+        // alert(JSON.stringify(data.message))
+      } else {
+        setDue("")
+      }
+      
+    })
+  }, [])
+
+ 
+  let email
+    let currentUser = localStorage.getItem("currentUser")
+    if (currentUser) {
+      currentUser = JSON.parse(currentUser)
+      email = currentUser.email
+    } else {
+      email = ""
+      console.log("No Emit Connection")
+    }
+
+
+  // setInterval(()=> {
+  //   socket.emit("checkDues", {email})
+  // },60000)
  
 
   return (
