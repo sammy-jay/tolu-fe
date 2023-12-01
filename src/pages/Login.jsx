@@ -42,12 +42,15 @@ function Login({ userDetails, setUserDetails }) {
         let url = baseUrl + "/itrack/sign-in";
         let response = await fetch(url, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
           body: JSON.stringify(signInDetails),
         });
         // alert("k")
         let data = await response.json();
-        
+
         if (response.status === 200) {
           // alert(data.message)
           localStorage.setItem("currentUser", JSON.stringify(data.message));
