@@ -47,6 +47,7 @@ function Login({ userDetails, setUserDetails }) {
         });
         // alert("k")
         let data = await response.json();
+        
         if (response.status === 200) {
           // alert(data.message)
           localStorage.setItem("currentUser", JSON.stringify(data.message));
