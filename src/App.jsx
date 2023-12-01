@@ -36,37 +36,37 @@ function App() {
   if (dotEnv.MODE === "development") {
     baseUrl = "http://localhost:3000";
   } else {
-    baseUrl = "https://itrack-server.vercel.app";
+    baseUrl = "https://itrack-server-2.vercel.app";
   }
 
-  const socket = io(baseUrl)
+  // const socket = io(baseUrl)
 
-  useEffect(()=> {
-    socket.on("message", (data)=> {
-      // console.log(data.dueArr)
-      // alert(JSON.stringify(data.message))
-      console.log(data)
-      if (data.dueArr !== "") {
-        // alert(`due: ${JSON.stringify(due)}`)
-        // alert(`msg: ${JSON.stringify(data.message)}`)
-        if (due === data.message) {
-          alert("same")
-        } else {
-          // alert(data.message[0].customer)
-          setDue(data.message)
-        }
-        // setDue(data.message)
+  // useEffect(()=> {
+  //   socket.on("message", (data)=> {
+  //     // console.log(data.dueArr)
+  //     // alert(JSON.stringify(data.message))
+  //     console.log(data)
+  //     if (data.dueArr !== "") {
+  //       // alert(`due: ${JSON.stringify(due)}`)
+  //       // alert(`msg: ${JSON.stringify(data.message)}`)
+  //       if (due === data.message) {
+  //         alert("same")
+  //       } else {
+  //         // alert(data.message[0].customer)
+  //         setDue(data.message)
+  //       }
+  //       // setDue(data.message)
         
-        // alert(typeof(data.message))
-        // alert(data.message.length)
-        // alert("k")
-        // alert(JSON.stringify(data.message))
-      } else {
-        setDue("")
-      }
+  //       // alert(typeof(data.message))
+  //       // alert(data.message.length)
+  //       // alert("k")
+  //       // alert(JSON.stringify(data.message))
+  //     } else {
+  //       setDue("")
+  //     }
       
-    })
-  }, [])
+  //   })
+  // }, [])
 
  
   let email
