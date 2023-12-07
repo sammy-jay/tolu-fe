@@ -230,7 +230,9 @@ function ExpandSideBar({
                       }}
                       className="py-3 text-left flex items-center gap-2 border-b border-slate-500"
                     >
-                      <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-red-20">
+                        <img src={customer_logo} />
+                      </div>
                       <p className="text-slate-700 hover:text-purple-800 hover:font-semibold font-medium">
                         <button>Create Customer</button>
                       </p>
@@ -258,7 +260,9 @@ function ExpandSideBar({
                       <div className="ml-5">=</div>
                     </div>
                     <div className="py-3 flex items-center gap-2 text-left border-t border-slate-500">
-                      <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-red-20">
+                        <img src={transaction_logo} />
+                      </div>
                       <p className="text-slate-700 font-medium hover:text-purple-800 hover:font-semibold">
                         Record Transaction
                       </p>
@@ -354,7 +358,7 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
         </li>
         <li
           onClick={() => setNavItems("CreateNew")}
-          className={`relative flex items-center gap-[5%] p-2 rounded-lg`}
+          className={`relative flex items-center gap-[5%] p-2 rounded-lg`} 
         >
           <div className="flex ml-2 items-center justify-center relative w-9 h-9 bg-purple-40 rounded-xl">
             <img src={createnew_logo} />
@@ -530,6 +534,8 @@ function SideBar({ due, setDue }) {
         customer: "",
         transaction: "",
       };
+
+
       try {
         url = baseUrl + "/itrack/dashboard";
         let response = await fetch(url, {
@@ -881,19 +887,19 @@ function SideBar({ due, setDue }) {
                 )}
                 <NotificationsNoneIcon sx={{ fontSize: 30 }} />
               </div>
-              <div className="absolute -bottom-16 -right-28 z-50">
+              <div className="absolute top-12 -right-28 z-50 space-y-2 bg-slate-50">
                 {showDues &&
                   due !== "" &&
                   due.map((item) => {
                     return (
-                      <div className="flex w-80 justify-between h-10 items-center p-2 text-xl bg-slate-50">
-                        <div className="w-4 h-4 rounded-full bg-red-600 flex items-center justify-center">
+                      <div onClick={()=> {setNavItems("Invoices"); setShowDues(false)}} className="flex w-80 justify-between items-center p-2 bg-slate-50 border-2 border-red-300 rounded-lg hover:bg-pink-100">
+                        <div className="w-4 h-4 rounded-full text-sm text-slate-50 bg-red-600 flex items-center justify-center">
                           !
                         </div>
-                        <div>
-                          <p classNme="text-red-600">Unpaid Invoices</p>
-                          <p className=" text-red-600 text-[15px]">
-                            You still have unpaid invoices for {item.customer}
+                        <div className="w-[90%] bg-red-40">
+                          <p className="text-red-600 text-sm font-bold leading-">Unpaid Invoices</p>
+                          <p className=" text-red-600 text-[9px] leading-">
+                            You still have unpaid invoices for "{item.customer}""
                           </p>
                         </div>
                       </div>
@@ -1223,7 +1229,7 @@ function SideBar({ due, setDue }) {
                             </p>
                           </div>
                         </div>
-                        {navRes.transaction.map((items, index) => {
+                        { navRes.transaction && navRes.transaction.map((items, index) => {
                           return (
                             <div className="px-5 py-3 flex justify-between items-center font-bold text-slate-600 text-sm bg-red-40">
                               <div>
