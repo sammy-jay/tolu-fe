@@ -361,7 +361,57 @@ function CollapseSideBar({ navItems, setNavItems, setNavBarState }) {
           </div>
           {/* <p className="text-xl">Create New</p> */}
           {navItems === "CreateNew" && (
-            <div className="absolute w-2 h-1/2 top-[25%] bg-purple-400 -right-1 rounded-l-lg "></div>
+            <>
+              <div className="absolute top-0 w-2 h-full bg-purple-400 -right-5 rounded-l-lg "></div>
+              <div
+                id="createNewDiv"
+                className={`absolute top-0 w-2 h-full bg-red-60 -right-5 rounded-l-lg`}
+              >
+                <div className="relative left-2 bg-slate-200 w-60 shadow-md shadow-slate-600 rounded-md">
+                  <div className="px-5 py-2 flex flex-col">
+                    <div
+                      onClick={() => {
+                        handleCreateNew("createCustomer");
+                      }}
+                      className="py-3 text-left flex items-center gap-2 border-b border-slate-500"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                      <p className="text-slate-700 hover:text-purple-800 hover:font-semibold font-medium">
+                        <button>Create Customer</button>
+                      </p>
+                    </div>
+                    <div className="group py-3 text-left flex items-center gap-2  bg-red-20 w-60">
+                      <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                      <p className="text-slate-700 font-medium hover:text-purple-800 hover:font-semibold grou">
+                        Create Invoice
+                        <div className="absolute bg-slate-200 w-60 left-full top-16 hidden group-hover:block px-5 py-2 shadow-md shadow-slate-600 rounded-r-md ">
+                          <div className="py-3 text-left flex items-center gap-2 border-b border-slate-500">
+                            <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                            <p className="text-slate-700 font-medium">
+                              <button>From Existing Debt</button>
+                            </p>
+                          </div>
+                          <div className="py-3 text-left flex items-center gap-2">
+                            <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                            <p className="text-slate-700 font-medium">
+                              <button>New Invoice</button>
+                            </p>
+                          </div>
+                        </div>
+                      </p>
+
+                      <div className="ml-5">=</div>
+                    </div>
+                    <div className="py-3 flex items-center gap-2 text-left border-t border-slate-500">
+                      <div className="w-10 h-10 rounded-full bg-red-200"></div>
+                      <p className="text-slate-700 font-medium hover:text-purple-800 hover:font-semibold">
+                        Record Transaction
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
         </li>
       </ul>

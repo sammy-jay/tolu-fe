@@ -27,9 +27,6 @@ function Login({ userDetails, setUserDetails }) {
     baseUrl = dotEnv.VITE_PROD_URL;
   }
 
-  
-  
-
 
   async function handleSubmit(param) {
     
