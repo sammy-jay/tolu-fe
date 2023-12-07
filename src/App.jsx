@@ -58,7 +58,7 @@ function App() {
       body: JSON.stringify({ sellerEmail: email })
     })
     let data = await response.json()
-    alert(JSON.stringify(data))
+    // alert(JSON.stringify(data))
     setDue(data.message)
   }
   getDues()
